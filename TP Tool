@@ -1,0 +1,27 @@
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "TpTool"
+
+local function teleport()
+    -- Check if the hit target is a valid object on the map
+    if mouse.Target then
+        local pos = mouse.Hit.p + Vector3.new(0, 2.5, 0)
+        pos = CFrame.new(pos.X, pos.Y, pos.Z)
+        player.Character.HumanoidRootPart.CFrame = pos
+    end
+end
+
+tool.Activated:Connect(teleport)
+
+-- Function to add the tool to the player's backpack
+local function giveTool(character)
+    tool.Parent = player.Backpack
+end
+
+-- Give the tool when the script runs initially
+giveTool(player.Character or player.CharacterAdded:Wait())
+
+-- Connect the CharacterAdded event to give the tool on respawn
+player.CharacterAdded:Connect(giveTool)
