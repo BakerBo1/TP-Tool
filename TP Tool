@@ -1,3 +1,16 @@
+local function callback(Text)
+end
+ 
+local NotificationBindable = Instance.new("BindableFunction")
+NotificationBindable.OnInvoke = callback
+ 
+game.StarterGui:SetCore("SendNotification", {
+    Title = "TpTool";
+    Text = "Created By @Moonwalker.24 on tiktok";
+    Duration = "5";
+    Callback = NotificationBindable;
+})
+
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
 local tool = Instance.new("Tool")
